@@ -7,7 +7,8 @@
 # Bonpay SDK
 Bonday is a software development kit that allows for ease of crypto payment integration on the web. Accept crypto payments using different payment methods available like NFT, ERC20 tokens, Native tokens and more.
 
-
+# Demo
+Check out this live demo on Binance Testnet <a href="https://bonpay-js.vercel.app/">here</a>.
 ## Usage
 Currently, anyone can use bonpay SDK via a simple hyperlink integration on a new or existing web page.
 ### Installing
