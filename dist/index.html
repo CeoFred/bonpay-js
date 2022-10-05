@@ -7,13 +7,16 @@
    <body>
      <div id="pay-widget-wrapper">
        Welcome to my website,pay for the item now.
+       <button id="button">Pay Now</button>
      </div>
-    <script src="main.bundle.js"></script>
+    <script src="v1.index.bundle.js"></script>
     <script>
-      const pay = new Pay({config: {value:"0.0001",recepient:'0xAFcC4d55a83ae1A449Bee7783A2737aFb5d82254', chainId: 80001 }})
+       const pay = new BonPay({recepient:'0xAFcC4d55a83ae1A449Bee7783A2737aFb5d82254', chainId: 97 })
+
       pay.setup(
         success,
-        error
+        error,
+        onClose
       );
       function success(data){
         console.log(data)
@@ -22,7 +25,18 @@
       function error(data){
         console.log(data);
       }
-      pay.open();
+
+      function onClose(data){
+        console.log(data);
+      }
+
+      const button = document.querySelector('#button');
+
+      button.addEventListener('click',function(){
+        pay.open();
+      })
+
+      
     </script>
    </body>
  </html>

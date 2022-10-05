@@ -5,7 +5,7 @@
 
 
 const utils = () => {
-const origin = "http://localhost:3000";
+const origin = "https://bonpay.codemon.me";
 
 const iFrameId = "pay-frame-id";
 const containerId = "pay-widget-wrapper";

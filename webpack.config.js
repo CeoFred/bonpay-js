@@ -3,9 +3,11 @@ const path = require('path');
 module.exports = {
   devtool: 'inline-source-map',
   mode: 'development',
-  entry: './src/index.ts',
+  entry: {
+    v1: './src/v1/index.ts'
+  },
   output: {
-     filename: '[name].bundle.js',
+     filename: '[name].index.bundle.js',
      path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
