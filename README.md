@@ -10,39 +10,138 @@ Bonday is a software development kit that allows for ease of crypto payment inte
 
 ## Usage
 Currently, anyone can use bonpay SDK via a simple hyperlink integration on a new or existing web page.
-### Import
-import bonpay script into your web application via CDN
+### Installing
+Using CDN:
 
+```js
+<script src="https://bonpay-js.vercel.app/v1.index.bundle.js"></script>   
 ```
+
+### Example
+After the bonpay script has been loaded, a global ```BonPay``` object is injected into the global ```window``` object for ease of availability.
+##### Creating an instance
+```js
+ 
+  const pay = new BonPay({value:"0.003",recepient:'0x0', chainId: 97 })
+ 
+```
+
+
+##### Setup event handlers
+
+```js
+
+  pay.setup(onSuccess,onError,onClose);
+
+
+  function onSuccess(data){
+    // fired when the transaction is successful
+  }
+
+  function onError(error){
+    // an error has occured with transaction
+  }
+
+  function onClose(data){
+    // bonpay modal has been closed by user or after a successful transaction.
+  }
+```
+
+##### Open Bondpay 
+To open a bondpay dialog simple call the open method on the bonpay object:
+```js
+pay.open();
+```
+### Instance Configuration
+BonPay is initialized with a configuration object which is required to setup and open up the bonpay dialog. See below for specifications on the configuration object.
+
+```js
+{
+ // `value` is the amount to send in ether
+  value: '1', // no-default, required, string
+
+  // `recepient` is an address to deposit ether value
+  recepient: '0xAFcC4d55a83ae1A449Bee7783A2737aFb5d82254', // no-default, required, string
+
+  // `chainId` is a network Id. 
+  chainId: 1, // no-default, required, integer
+}
+```
+
+### Supported Networks
+| Network | ChainId |  |
+| --- | --- | --- |
+| Ethereum  | 1 |  ✅|
+| Binance Smart Chain | 56 |  ✅  |
+| Polygon Mainnet | 137 |  ✅  |
+| Mumbai | 80001 |  ✅  |
+| BSC Testnet | 97 |  ✅ |
+| Goerli Testnet | 5 |  ✅  |
+| Kovan Testnet | 42 |  ✅ |
+
+
+
+### Full Example
+Create an HTML file and paste this script below and get the bag.
+```html
 <!DOCTYPE html>
  <html>
    <head>
      <meta charset="utf-8" />
-     <title>Hello World</title>
-    <script src="https://bonpay-js.vercel.app/v1.index.bundle.js"></script>
+     <title>Getting Started</title>
    </head>
    <body>
-     
+     <div id="pay-widget-wrapper">
+       Welcome to my website, pay for the item now.
+       <button id="button">Pay Now</button>
+     </div>
+    <script src="https://bonpay-js.vercel.app/v1.index.bundle.js"></script>
+    <script>
+       const pay = new BonPay({value: '1',recepient:'0xAFcC4d55a83ae1A449Bee7783A2737aFb5d82254', chainId: 97 })
+
+      
+      function success(data){
+        console.log(data)
+        // redirect your users
+      }
+
+      function error(data){
+        console.log(data);
+      }
+
+      function onClose(data){
+        console.log(data);
+      }
+
+      const button = document.querySelector('#button');
+
+      button.addEventListener('click',function(){
+
+        pay.setup(
+        success,
+        error,
+        onClose
+      );
+        pay.open();
+      })
+
+      
+    </script>
    </body>
  </html>
 
 ```
 
-### Initialize
-After the bonpay script has been loaded, a global ```BonPay``` object is injected into the global ```window``` object for ease of availability.
 
-```
- +++++
-  <script>
-  const pay = new BonPay({value:"0.00003",recepient:'0xAFcC4d55a83ae1A449Bee7783A2737aFb5d82254', chainId: 97 })
+## Notice
 
-  pay.setup(
-        success,
-        error,
-        onClose
-  );
-  </script>
-+++++
-```
+Each time the bonpay modal is closed, the bonpay unmounts event listerners and removes completely the bonpay dialog container. To re-open the modal successfully, you need to call the ```setup(onSuccess, onError, onClose)``` method again and finally ```.open()``` method.
 
-BonPay is initialized with a configuration object which is required to setup and open up the bonpay dialog. See below for specifications on the configuration object.
+
+## Credits
+
+Bonpay is heavily inspired by the [paystack](https://paystack.com).
+
+## License
+
+[MIT](LICENSE)
