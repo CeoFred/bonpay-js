@@ -5,7 +5,7 @@
 
 
 const utils = () => {
-const origin = "https://bonpay.codemon.me";
+const origin = process.env.ENV === 'development' ? "http://localhost:3000" : "https://bonpay.codemon.me";
 
 const iFrameId = "pay-frame-id";
 const containerId = "pay-widget-wrapper";

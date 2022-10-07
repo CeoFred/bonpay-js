@@ -23,29 +23,23 @@ After the bonpay script has been loaded, a global ```BonPay``` object is injecte
 ##### Creating an instance
 ```js
  
-  const pay = new BonPay({value:"0.003",recepient:'0x0', chainId: 97 })
- 
+  const pay = new BonPay({
+      value: "0.10001",
+      recepient: '0xAFcC4d55a83ae1A449Bee7783A2737aFb5d82254',
+      chainId: 80001,
+      onSuccess,
+      onError,
+      onClose,
+    })
 ```
 
 
 ##### Setup event handlers
-
+Emit config data and prepare  UI disalog for transactions.
 ```js
 
-  pay.setup(onSuccess,onError,onClose);
+  pay.setup();
 
-
-  function onSuccess(data){
-    // fired when the transaction is successful
-  }
-
-  function onError(error){
-    // an error has occured with transaction
-  }
-
-  function onClose(data){
-    // bonpay modal has been closed by user or after a successful transaction.
-  }
 ```
 
 ##### Open Bondpay 
@@ -66,6 +60,23 @@ BonPay is initialized with a configuration object which is required to setup and
 
   // `chainId` is a network Id. 
   chainId: 1, // no-default, required, integer
+
+  // `onSuccess` callBack function on transaction successfull
+  onSuccess: function(transactionData){}, // no-default, optional, function
+
+   // `onClose` callBack function on modal close
+  onClose: function(closeEvent){}, // no-default, optional, function
+
+   // `onError` callBack function on transaction successfull
+  onError: function(error){}, // no-default, optional, function
+
+  // `nft` Accept NFT as an alternative form of payment specifying
+  // the collection contract address. A collection field is required 
+  // when specifying an nft option
+   nft: { 
+        collection: ["0xE3ffC7A3Eb0Df96CBc08fC95cdDF776B22124A97"]
+    } // optional
+
 }
 ```
 
@@ -86,51 +97,55 @@ BonPay is initialized with a configuration object which is required to setup and
 Create an HTML file and paste this script below and get the bag.
 ```html
 <!DOCTYPE html>
- <html>
-   <head>
-     <meta charset="utf-8" />
-     <title>Getting Started</title>
-   </head>
-   <body>
-     <div id="pay-widget-wrapper">
-       Welcome to my website, pay for the item now.
-       <button id="button">Pay Now</button>
-     </div>
-    <script src="https://bonpay-js.vercel.app/v1.index.bundle.js"></script>
-    <script>
-       const pay = new BonPay({value: '1',recepient:'0xAFcC4d55a83ae1A449Bee7783A2737aFb5d82254', chainId: 97 })
+<html>
 
-      
-      function success(data){
-        console.log(data)
-        // redirect your users
+<head>
+  <meta charset="utf-8" />
+  <title>Getting Started</title>
+  <script src="https://bonpay-js.vercel.app/v1.index.bundle.js"></script>
+</head>
+
+<body>
+  <div id="pay-widget-wrapper">
+    Welcome to my website,pay for the item now.
+    <button id="button">Pay Now</button>
+  </div>
+  <script>
+    const pay = new BonPay({
+      value: "0.10001",
+      recepient: '0xAFcC4d55a83ae1A449Bee7783A2737aFb5d82254',
+      chainId: 80001,
+      onSuccess: success,
+      onError: error,
+      onClose,
+      nft: {
+        collection: ["0xE3ffC7A3Eb0Df96CBc08fC95cdDF776B22124A97"]
       }
+    })
 
-      function error(data){
-        console.log(data);
-      }
 
-      function onClose(data){
-        console.log(data);
-      }
+    function success(data) {
+      console.log(data)
+    }
 
-      const button = document.querySelector('#button');
+    function error(data) {
+      console.log(data);
+    }
 
-      button.addEventListener('click',function(){
+    function onClose(data) {
+      console.log(data);
+    }
 
-        pay.setup(
-        success,
-        error,
-        onClose
-      );
-        pay.open();
-      })
+    const button = document.querySelector('#button');
 
-      
-    </script>
-   </body>
- </html>
+    button.addEventListener('click', function () {
+      pay.setup();
+      pay.open();
+    })
+  </script>
+</body>
 
+</html>
 ```
 
 

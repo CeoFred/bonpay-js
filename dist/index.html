@@ -1,43 +1,50 @@
 <!DOCTYPE html>
- <html>
-   <head>
-     <meta charset="utf-8" />
-     <title>Getting Started</title>
-   </head>
-   <body>
-     <div id="pay-widget-wrapper">
-       Welcome to my website,pay for the item now.
-       <button id="button">Pay Now</button>
-     </div>
-    <script src="v1.index.bundle.js"></script>
-    <script>
-       const pay = new BonPay({value:"0.00001",recepient:'0xAFcC4d55a83ae1A449Bee7783A2737aFb5d82254', chainId: 97 })
+<html>
 
-     
-      function success(data){
-        console.log(data)
+<head>
+  <meta charset="utf-8" />
+  <title>Getting Started</title>
+</head>
+
+<body>
+  <div id="pay-widget-wrapper">
+    Welcome to my website,pay for the item now.
+    <button id="button">Pay Now</button>
+  </div>
+  <script src="v1.index.bundle.js"></script>
+  <script>
+    const pay = new BonPay({
+      value: "0.10001",
+      recepient: '0xAFcC4d55a83ae1A449Bee7783A2737aFb5d82254',
+      chainId: 80001,
+      onSuccess: success,
+      onError: error,
+      onClose,
+      nft: {
+        collection: ["0xE3ffC7A3Eb0Df96CBc08fC95cdDF776B22124A97"]
       }
+    })
 
-      function error(data){
-        console.log(data);
-      }
 
-      function onClose(data){
-        console.log(data);
-      }
+    function success(data) {
+      console.log(data)
+    }
 
-      const button = document.querySelector('#button');
+    function error(data) {
+      console.log(data);
+    }
 
-      button.addEventListener('click',function(){
-         pay.setup(
-        success,
-        error,
-        onClose
-      );
-        pay.open();
-      })
+    function onClose(data) {
+      console.log(data);
+    }
 
-      
-    </script>
-   </body>
- </html>
+    const button = document.querySelector('#button');
+
+    button.addEventListener('click', function () {
+      pay.setup();
+      pay.open();
+    })
+  </script>
+</body>
+
+</html>

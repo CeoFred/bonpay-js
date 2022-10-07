@@ -9,7 +9,7 @@ function BonPay(props: Init) {
     return this;
 }
 
-BonPay.prototype.setup = function (onSuccess: any, onError: any, onClose:any) {
+BonPay.prototype.setup = function () {
  
    if(Object.values(this.config).length < 3){
      throw new Error("BondPay Misconguration,Check initilization Parameters.");
@@ -17,13 +17,18 @@ BonPay.prototype.setup = function (onSuccess: any, onError: any, onClose:any) {
 
   const iframe = BonPay.prototype.utils.init({
     title: "BondPayConfig",
-    config: this.config,
+    config: {
+       value: this.config.value,
+      recepient: this.config.recepient,
+      chainId: this.config.chainId,
+      nft: this.config?.nft
+    },
   });
 
   BonPay.prototype.iframe = iframe;
-  BonPay.prototype.onSuccess = onSuccess;
-  BonPay.prototype.onError = onError;
-  BonPay.prototype.onClose = onClose;
+  BonPay.prototype.onSuccess = this.config.onSuccess;
+  BonPay.prototype.onError = this.config.onError;
+  BonPay.prototype.onClose = this.config.onClose;
 };
 
 
