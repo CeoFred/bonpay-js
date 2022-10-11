@@ -21,7 +21,8 @@ BonPay.prototype.setup = function () {
        value: this.config.value,
       recepient: this.config.recepient,
       chainId: this.config.chainId,
-      nft: this.config?.nft
+      nft: this.config?.nft,
+      tokens: this.config?.tokens
     },
   });
 

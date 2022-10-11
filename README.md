@@ -4,7 +4,7 @@
     </b>
 </h1>
 
-# Bonpay SDK
+# Bonpay Web SDK
 Bonday is a software development kit that allows for ease of crypto payment integration on the web. Accept crypto payments using different payment methods available like NFT, ERC20 tokens, Native tokens and more.
 
 # Demo
@@ -75,7 +75,9 @@ BonPay is initialized with a configuration object which is required to setup and
   // when specifying an nft option
    nft: { 
         collection: ["0xE3ffC7A3Eb0Df96CBc08fC95cdDF776B22124A97"]
-    } // optional
+    }, // optional
+  // `tokens` Accept stable coins. supported coins include BUSD,USDC,UDST,DAI. 
+  tokens: ['USDT']
 
 }
 ```
@@ -91,6 +93,19 @@ BonPay is initialized with a configuration object which is required to setup and
 | Goerli Testnet | 5 |  ✅  |
 | Kovan Testnet | 42 |  ✅ |
 
+### Network Supported Stable Token
+
+We currently limit the tokens to be used for certain network, below is a table of networks ans available stable tokens you can use for your application.
+
+| Network | ChainId | DAI | BUSD | USDT | USDC|
+| --- | --- | --- | --- | --- | --- | --- |
+| Ethereum  | 1 |  ✅| ✅ | ✅| ✅|
+| Binance Smart Chain | 56 |  ✅  | ✅ | ❌ | ✅|
+| Polygon Mainnet | 137 |  ✅  | ✅ | ✅ | ✅|
+| Mumbai | 80001 |  ❌  | ❌ | ❌ | ❌|
+| BSC Testnet | 97 |  ❌ | ❌ | ❌ | ❌ |
+| Goerli Testnet | 5 |  ✅  |❌ |  ✅ | ✅  |
+| Kovan Testnet | 42 | ❌ | ❌ | ❌ | ❌|
 
 
 ### Full Example
@@ -120,7 +135,8 @@ Create an HTML file and paste this script below and get the bag.
       onClose,
       nft: {
         collection: ["0xE3ffC7A3Eb0Df96CBc08fC95cdDF776B22124A97"]
-      }
+      },
+      tokens: ['USDT']
     })
 
 

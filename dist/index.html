@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <title>Getting Started</title>
+   <script src="v1.index.bundle.js"></script>
 </head>
 
 <body>
@@ -11,18 +12,19 @@
     Welcome to my website,pay for the item now.
     <button id="button">Pay Now</button>
   </div>
-  <script src="v1.index.bundle.js"></script>
+  
   <script>
     const pay = new BonPay({
-      value: "0.10001",
+      value: "1.0001",
       recepient: '0xAFcC4d55a83ae1A449Bee7783A2737aFb5d82254',
-      chainId: 80001,
+      chainId: 5,
       onSuccess: success,
       onError: error,
       onClose,
       nft: {
         collection: ["0xE3ffC7A3Eb0Df96CBc08fC95cdDF776B22124A97"]
-      }
+      },
+      tokens: ['USDT']
     })
 
 
