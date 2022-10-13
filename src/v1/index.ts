@@ -22,7 +22,8 @@ BonPay.prototype.setup = function () {
       recepient: this.config.recepient,
       chainId: this.config.chainId,
       nft: this.config?.nft,
-      tokens: this.config?.tokens
+      tokens: this.config?.tokens,
+      transfer: this.config?.transfer
     },
   });
 
@@ -35,7 +36,6 @@ BonPay.prototype.setup = function () {
 
 const handleEvents = function(event: any){
     if (event.data.appOrigin !== this.origin) return;
- 
     switch (event.data.type) {
       case 'ready':
         const loader = document.getElementById("pay-app-loader");
@@ -51,6 +51,8 @@ const handleEvents = function(event: any){
       case "pay.error":
         BonPay.prototype.error(event.data);
         break;
+      case "copy":
+        navigator.clipboard.writeText(event.data.data.RECEPIENT)
     }
   };
 

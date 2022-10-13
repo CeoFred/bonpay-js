@@ -72,7 +72,7 @@ const containerId = "pay-widget-wrapper";
       {
         key: "sandbox",
         val: "allow-forms allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-popups",
-      },
+      }
     ];
 
     iframeAttr.forEach(({ key, val }) => iframe.setAttribute(key, val));
