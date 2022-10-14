@@ -19,7 +19,7 @@ BonPay.prototype.setup = function () {
     title: "BondPayConfig",
     config: {
        value: this.config.value,
-      recepient: this.config.recepient,
+      recipient: this.config.recipient,
       chainId: this.config.chainId,
       nft: this.config?.nft,
       tokens: this.config?.tokens,

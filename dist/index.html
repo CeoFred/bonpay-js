@@ -16,15 +16,14 @@
   <script>
     const pay = new BonPay({
       value: "0.0001",
-      recepient: '0xAFcC4d55a83ae1A449Bee7783A2737aFb5d82254',
-      chainId: 5,
+      recipient: '0xAFcC4d55a83ae1A449Bee7783A2737aFb5d82254',
+      chainId: 80001,
       onSuccess: success,
       onError: error,
       onClose,
       nft: {
         collection: ["0xE3ffC7A3Eb0Df96CBc08fC95cdDF776B22124A97"]
       },
-      tokens: ['USDT','DAI','USDC'],
       transfer: true
     })
 
